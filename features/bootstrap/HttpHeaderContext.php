@@ -27,22 +27,10 @@ final class HttpHeaderContext implements Context
     /**
      * Sets the default Accept HTTP header to null (workaround to artificially remove it).
      *
-     * @AfterStep
-     */
-    public function removeAcceptHeaderAfterRequest(AfterStepScope $event)
-    {
-        if (preg_match('/^I send a "[A-Z]+" request to ".+"/', $event->getStep()->getText())) {
-            $this->request->setHttpHeader('Accept', null);
-        }
-    }
-
-    /**
-     * Sets the default Accept HTTP header to null (workaround to artificially remove it).
-     *
      * @BeforeScenario
      */
     public function removeAcceptHeaderBeforeScenario()
     {
-        $this->request->setHttpHeader('Accept', null);
+        $this->request->setHttpHeader('Accept', 'application/ld+json');
     }
 }
